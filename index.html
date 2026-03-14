@@ -5,17 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>xyzcatfyi</title>
   <style>
-    body {
-      font-family: sans-serif;
-      max-width: 700px;
-      margin: 60px auto;
-      padding: 0 20px;
-      color: #222;
-      line-height: 1.6;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    h1 { font-size: 2rem; margin-bottom: 0; }
-    h2 { margin-top: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 0.3rem; }
-    a { color: #555; }
+
+    body {
+      background-color: #1a1a1a;
+      color: #d4d0c8;
+      font-family: sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      color: #edeae0;
+      margin-bottom: 0.4rem;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #a09d95;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 2.5rem;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #2e2e2e;
+    }
+
+    p {
+      color: #d4d0c8;
+      margin-bottom: 0.6rem;
+    }
+
+    a {
+      color: #a09d95;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      color: #edeae0;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 0.4rem;
+    }
+
+    .skill-tag {
+      background: #242424;
+      border: 1px solid #2e2e2e;
+      color: #a09d95;
+      font-size: 0.85rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
   </style>
 </head>
 <body>
@@ -24,7 +79,13 @@
   <p>A placeholder intro — we'll fill this in soon.</p>
 
   <h2>Skills</h2>
-  <p>Python · HTML/CSS · Git · Terminal · Obsidian</p>
+  <div class="skills">
+    <span class="skill-tag">Python</span>
+    <span class="skill-tag">HTML/CSS</span>
+    <span class="skill-tag">Git</span>
+    <span class="skill-tag">Terminal</span>
+    <span class="skill-tag">Obsidian</span>
+  </div>
 
   <h2>Projects</h2>
   <p>Coming soon.</p>
