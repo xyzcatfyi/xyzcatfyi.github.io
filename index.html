@@ -1,44 +1,100 @@
 <!DOCTYPE html>
+<!-- Tells the browser this is an HTML5 document — always first line -->
 <html lang="en">
+<!-- lang="en" helps screen readers and search engines know the page language -->
+
 <head>
+  <!-- HEAD: everything here is metadata — the browser reads it but doesn't display it directly -->
+
   <meta charset="UTF-8">
+  <!-- UTF-8 encoding: handles special characters (accents, symbols, emoji) correctly -->
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>xyzcatfyi</title>
+  <!-- Makes the page responsive: tells mobile browsers to use the device's actual width,
+       not pretend it's a desktop. Without this, mobile browsers zoom out by default. -->
+
+  <title>Cat | Developer Portfolio</title>
+  <!-- What appears in the browser tab and in search engine results -->
+
   <style>
+    /* =============================================
+       RESET
+       Browsers apply their own default styles (margins, padding, etc.).
+       This wipes those out so we start with a clean slate.
+    ============================================= */
     * {
       box-sizing: border-box;
+      /* border-box: padding and borders are included in an element's width/height calculation.
+         The default (content-box) can cause unexpected overflow — this is almost always better. */
       margin: 0;
       padding: 0;
     }
 
+    /* =============================================
+       BASE / BODY
+       Sets the overall page appearance and constrains the content width.
+    ============================================= */
     body {
       background-color: #1a1a1a;
+      /* Dark neutral background — the foundation of the whole colour scheme */
+
       color: #d4d0c8;
+      /* Main text colour: slightly warm off-white, easier on the eyes than pure white */
+
       font-family: sans-serif;
+      /* Falls back to the system's default sans-serif font.
+         We can upgrade this later (e.g. a Google Font) without changing anything else. */
+
       font-size: 1rem;
+      /* 1rem = 16px by default. Using rem (not px) means the size respects the user's
+         browser font size settings — better for accessibility. */
+
       line-height: 1.7;
+      /* Space between lines of text. 1.7 is generous and readable — especially for body copy. */
+
       max-width: 680px;
+      /* Constrains the content to a readable column width.
+         Long lines of text are harder to read — this keeps things comfortable. */
+
       margin: 0 auto;
+      /* Centers the content column horizontally.
+         margin: 0 auto = 0 top/bottom, auto left/right (auto = equal on both sides = centered) */
+
       padding: 60px 24px;
+      /* Breathing room: 60px top/bottom, 24px left/right.
+         The 24px sides mean content won't touch the screen edge on narrow screens. */
     }
 
+    /* =============================================
+       TYPOGRAPHY
+       Headings and paragraph styles.
+    ============================================= */
     h1 {
-      font-size: 2rem;
-      font-weight: 500;
-      color: #edeae0;
-      margin-bottom: 0.4rem;
+      font-size: 2rem;       /* Large, prominent name/title */
+      font-weight: 500;      /* Medium weight — not as heavy as bold (700) */
+      color: #edeae0;        /* Slightly brighter than body text to draw the eye */
+      margin-bottom: 0.4rem; /* Small gap between h1 and the text below it */
     }
 
     h2 {
+      /* Section headings — styled as small uppercase labels */
       font-size: 1.1rem;
       font-weight: 500;
-      color: #a09d95;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-top: 2.5rem;
+      color: #a09d95;              /* Muted/secondary colour — intentionally less prominent than body text */
+      text-transform: uppercase;   /* ALL CAPS visually */
+      letter-spacing: 0.08em;      /* Extra spacing between letters — common with uppercase labels */
+      margin-top: 2.5rem;          /* Large gap above each section heading = visual breathing room */
       margin-bottom: 0.8rem;
       padding-bottom: 0.4rem;
-      border-bottom: 1px solid #2e2e2e;
+      border-bottom: 1px solid #2e2e2e; /* Subtle divider line under each section heading */
+    }
+
+    h3 {
+      /* Card/item titles within sections */
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #edeae0;
+      margin-bottom: 4px;
     }
 
     p {
@@ -46,20 +102,47 @@
       margin-bottom: 0.6rem;
     }
 
+    /* =============================================
+       LINKS
+    ============================================= */
     a {
       color: #a09d95;
       text-decoration: underline;
-      text-underline-offset: 3px;
+      text-underline-offset: 3px; /* Pushes the underline down slightly — looks cleaner */
     }
 
     a:hover {
+      color: #edeae0; /* Lightens on hover — simple, clear interactive feedback */
+    }
+
+    /* =============================================
+       NAV
+       Simple anchor link navigation at the top of the page.
+       Anchor links (#skills, #projects, etc.) jump to sections on the same page.
+    ============================================= */
+    nav {
+      margin-bottom: 3rem; /* Space between nav and the page title below */
+    }
+
+    nav a {
+      font-size: 0.85rem;
+      color: #a09d95;
+      text-decoration: none;   /* No underline on nav links — cleaner */
+      margin-right: 1.2rem;    /* Space between each nav link */
+    }
+
+    nav a:hover {
       color: #edeae0;
     }
 
+    /* =============================================
+       SKILLS PILLS
+       The row of tag-style labels for skills.
+    ============================================= */
     .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      display: flex;       /* Lays items out in a row */
+      flex-wrap: wrap;     /* Wraps to a new line if there are too many to fit */
+      gap: 8px;            /* Space between each pill */
       margin-top: 0.4rem;
     }
 
@@ -69,30 +152,45 @@
       color: #a09d95;
       font-size: 0.85rem;
       padding: 4px 12px;
-      border-radius: 20px;
+      border-radius: 20px; /* Fully rounded ends — the "pill" shape */
     }
 
-    .project-item {
-      padding: 14px 16px;
-      background: #242424;
-      border: 1px solid #2e2e2e;
-      border-radius: 8px;
-      margin-bottom: 10px;
+    /* =============================================
+       PROJECT CARDS
+       Used for both the Projects section and other content sections (Shortcuts, Obsidian, etc.)
+    ============================================= */
+    .project-card {
+      padding: 16px 18px;
+      background: #242424;          /* Slightly lighter than the page background — creates depth */
+      border: 1px solid #2e2e2e;    /* Subtle border — defines the card edge */
+      border-radius: 8px;           /* Rounded corners */
+      margin-bottom: 12px;
     }
 
-    .project-item h3 {
-      font-size: 0.95rem;
+    .project-card h3 {
+      font-size: 1rem;
       font-weight: 500;
       color: #edeae0;
       margin-bottom: 4px;
     }
 
-    .project-item p {
+    .project-card p {
       font-size: 0.875rem;
       color: #a09d95;
-      margin: 0;
+      margin: 0 0 6px 0;
     }
 
+    .project-card .meta {
+      /* Small row of metadata below the description — stack, status, etc. */
+      font-size: 0.8rem;
+      color: #6b6864;        /* Even more muted than the description text */
+      margin-top: 8px;
+    }
+
+    /* =============================================
+       BADGES
+       Small inline labels — e.g. "coming soon", "live", "private"
+    ============================================= */
     .badge {
       display: inline-block;
       font-size: 0.75rem;
@@ -100,57 +198,201 @@
       border-radius: 20px;
       background: #2e2e2e;
       color: #a09d95;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
+
+    .badge.live {
+      /* Variant for live projects — slightly warmer colour to stand out */
+      background: #1f2a1f;
+      color: #6a9e6a;
+      border: 1px solid #2e3e2e;
+    }
+
+    .badge.private {
+      /* Variant for password-protected/private projects */
+      background: #2a2520;
+      color: #9e8a6a;
+      border: 1px solid #3e3020;
+    }
+
+    /* =============================================
+       FOOTER / FIND ME
+       Contact and links at the bottom of the page.
+    ============================================= */
+    .find-me {
+      margin-top: 1rem;
+    }
+
+    .find-me p {
+      font-size: 0.9rem;
+    }
+
   </style>
 </head>
+
 <body>
 
-  <h1>Hi, I'm Cat</h1>
-  <p>A placeholder intro — we'll fill this in soon.</p>
+  <!-- =============================================
+       NAV
+       Simple jump links so visitors can skip to sections.
+       The href="#skills" matches id="skills" on the section below.
+  ============================================= -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#shortcuts">Shortcuts</a>
+    <a href="#obsidian">Obsidian</a>
+    <a href="#cv">CV</a>
+  </nav>
 
-  <h2>Skills</h2>
+  <!-- =============================================
+       HERO / INTRO
+       The first thing visitors see. Placeholder text for now.
+  ============================================= -->
+  <section id="about">
+    <h1>Hi, I'm Cat</h1>
+
+    <!-- PLACEHOLDER: Replace this with your actual about text when ready.
+         Context to include: career transition from hospitality to tech,
+         current study (Tokio School), target roles (QA/Tester), location (Porto),
+         languages, what you're building. Keep it human — not a CV summary. -->
+    <p>[ About text coming soon — career changer, perpetual builder, based in Porto. ]</p>
+  </section>
+
+  <!-- =============================================
+       PROJECTS
+       Showcase section for your main projects.
+       Each .project-card is one project.
+       Badges: use class="badge live" for live, "badge private" for private, "badge" for coming soon.
+  ============================================= -->
+  <h2 id="projects">Projects</h2>
+
+  <!-- PROJECT: Crying and Budgeting -->
+  <div class="project-card">
+    <span class="badge live">live</span>
+    <h3>Crying and Budgeting</h3>
+    <p>A personal finance tracker for people who find budgeting emotionally challenging. Built for real use — shareable, no password required.</p>
+    <!-- PLACEHOLDER: Add screenshot image here when ready.
+         <img src="images/crying-and-budgeting.png" alt="Crying and Budgeting screenshot"> -->
+    <div class="meta">
+      Stack: React ·
+      <a href="https://cryingandbudgeting.netlify.app" target="_blank">cryingandbudgeting.netlify.app</a>
+    </div>
+  </div>
+
+  <!-- PROJECT: Skint -->
+  <div class="project-card">
+    <span class="badge private">private</span>
+    <h3>Skint</h3>
+    <p>Personal finance tracker — the private version. Password protected. Built with React; Crying and Budgeting was forked from this.</p>
+    <!-- PLACEHOLDER: Add screenshot here (screenshots only — it's password protected) -->
+    <div class="meta">
+      Stack: React · Password protected via Netlify
+    </div>
+  </div>
+
+  <!-- PROJECT: Security & Privacy Audit -->
+  <div class="project-card">
+    <span class="badge">in progress</span>
+    <h3>Security &amp; Privacy Audit Checklist</h3>
+    <p>An interactive checklist tool for auditing personal digital security and privacy. Built as a Claude artifact; screenshots only for now.</p>
+    <!-- PLACEHOLDER: Add screenshot here -->
+    <div class="meta">
+      Stack: HTML/CSS/JS (artifact)
+    </div>
+  </div>
+
+  <!-- PROJECT: Apple Shortcuts Pack -->
+  <div class="project-card">
+    <span class="badge">in progress</span>
+    <h3>Apple Shortcuts Pack</h3>
+    <p>A growing collection of macOS and iOS automations — daily routines, focus modes, timers, and task routing. Built around real daily use.</p>
+    <!-- PLACEHOLDER: Add screenshots/descriptions of individual shortcuts -->
+    <div class="meta">
+      Platform: macOS &amp; iOS
+    </div>
+  </div>
+
+  <!-- PROJECT: Py-Noir / Potterverse OOP -->
+  <div class="project-card">
+    <span class="badge">in progress</span>
+    <h3>Py-Noir — Potterverse OOP Project</h3>
+    <p>A Python learning project structured around the Potterverse. Covers object-oriented programming concepts: classes, inheritance, abstract base classes, and more.</p>
+    <!-- PLACEHOLDER: Link to GitHub repo when ready to share
+         <a href="https://github.com/xyzcatfyi/py-noir">View on GitHub</a> -->
+    <div class="meta">
+      Stack: Python · OOP
+    </div>
+  </div>
+
+  <!-- =============================================
+       SKILLS
+       Simple pill/tag display of technical skills.
+       Add or remove <span> tags as your skills grow.
+  ============================================= -->
+  <h2 id="skills">Skills</h2>
   <div class="skills">
     <span class="skill-tag">Python</span>
     <span class="skill-tag">HTML/CSS</span>
     <span class="skill-tag">Git</span>
     <span class="skill-tag">Terminal</span>
     <span class="skill-tag">Obsidian</span>
+    <span class="skill-tag">React</span>
+    <!-- PLACEHOLDER: Add more as you learn them -->
   </div>
 
-  <h2>HTML &amp; CSS</h2>
-  <div class="project-item">
-    <span class="badge">coming soon</span>
-    <h3>Snippets &amp; experiments</h3>
-    <p>Small bits of HTML and CSS — things I've built, broken, and learned from.</p>
-  </div>
-
-  <h2>Apple Shortcuts</h2>
-  <div class="project-item">
+  <!-- =============================================
+       APPLE SHORTCUTS
+       Separate section for the Shortcuts pack specifically.
+       Currently a placeholder card — expand when content is ready.
+  ============================================= -->
+  <h2 id="shortcuts">Apple Shortcuts</h2>
+  <div class="project-card">
     <span class="badge">coming soon</span>
     <h3>Automations &amp; shortcuts</h3>
     <p>Small automations for macOS and iOS. Simple, but useful.</p>
+    <!-- PLACEHOLDER: Expand with individual Shortcut descriptions and screenshots -->
   </div>
 
-  <h2>Obsidian</h2>
-  <div class="project-item">
+  <!-- =============================================
+       OBSIDIAN
+       For CSS snippets, templates, and Obsidian customisation work.
+  ============================================= -->
+  <h2 id="obsidian">Obsidian</h2>
+  <div class="project-card">
     <span class="badge">coming soon</span>
     <h3>Snippets, CSS &amp; templates</h3>
     <p>Extending Obsidian — custom styling, CSS snippets, and templates for a better personal knowledge base.</p>
+    <!-- PLACEHOLDER: Add individual snippets/templates as separate cards when ready -->
   </div>
 
-  <h2>CV</h2>
-  <div class="project-item">
+  <!-- =============================================
+       CV
+       Placeholder for the styled HTML/CSS CV.
+       Eventually this will link to a separate cv.html page.
+  ============================================= -->
+  <h2 id="cv">CV</h2>
+  <div class="project-card">
     <span class="badge">coming soon</span>
     <h3>Curriculum vitae</h3>
     <p>A styled CV — built with HTML and CSS, because why not.</p>
+    <!-- PLACEHOLDER: When ready, add links to EN and PT versions:
+         <a href="cv-en.html">English</a> · <a href="cv-pt.html">Português</a> -->
   </div>
 
+  <!-- =============================================
+       FIND ME / CONTACT
+       Links and contact info. Update email when alias is set up via SimpleLogin/Proton.
+  ============================================= -->
   <h2>Find me</h2>
-  <p>
-    <a href="https://github.com/xyzcatfyi">GitHub</a> ·
-    Contact: placeholder@email.com
-  </p>
+  <div class="find-me">
+    <p>
+      <a href="https://github.com/xyzcatfyi" target="_blank">GitHub</a> ·
+      <!-- PLACEHOLDER: Replace with real alias email once set up via SimpleLogin/Proton -->
+      Contact: placeholder@email.com
+    </p>
+  </div>
 
 </body>
 </html>
